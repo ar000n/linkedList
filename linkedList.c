@@ -13,3 +13,7 @@ int add_to_list(linkedList * list,void * value){
 	list->length++;
 	return list->length;
 };
+void *get_first_element(linkedList list){
+	void * firstElement = list.first;
+	return firstElement;
+};
