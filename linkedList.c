@@ -7,3 +7,9 @@ linkedList createList(void){
 	list.length = 0;
 	return list;
 };
+int add_to_list(linkedList * list,void * value){
+	list->last = value;
+	list->first = value;
+	list->length++;
+	return list->length;
+};

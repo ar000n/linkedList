@@ -10,3 +10,4 @@ typedef struct {
 }linkedList;
 
 linkedList createList(void);
+int add_to_list(linkedList *,void *);

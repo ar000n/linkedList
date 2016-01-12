@@ -7,6 +7,10 @@ void test_for_createList(){
 	assert(list.first == NULL);
 	assert(list.last == NULL);
 	assert(list.length == 0);
-
-
+};
+void test_for_add_to_list(){
+	int  value = 3;
+	linkedList list = createList();
+	int len = add_to_list(&list,&value);
+	assert(len == 1);
 }
