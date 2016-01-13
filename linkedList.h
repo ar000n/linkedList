@@ -1,6 +1,6 @@
-typedef struct{
-	int value;
-	struct element *next;
+typedef struct ele{
+	void *value;
+	struct ele *next;
 } element;
 
 typedef struct {
@@ -8,7 +8,10 @@ typedef struct {
 	element *last;
 	int length;
 }linkedList;
+typedef void(ElementProcessor) (void *);
 
 linkedList createList(void);
 int add_to_list(linkedList *,void *);
 void *get_first_element(linkedList list);
+void *get_last_element(linkedList list);
+void forEach(linkedList, ElementProcessor e);
