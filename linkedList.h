@@ -18,4 +18,8 @@ void forEach(linkedList, ElementProcessor e);
 void * getElementAt(linkedList, int );
 int indexOf(linkedList, void *);
 void * deleteElementAt(linkedList *, int);
+int asArray(linkedList, void **, int maxElements);
+typedef int (MatchFunc)(void*, void*);
+linkedList filter(linkedList,MatchFunc,void*);
+int isEven(void*, void*);
 

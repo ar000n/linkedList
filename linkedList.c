@@ -64,16 +64,47 @@ int indexOf(linkedList list, void * ele){
 };
 
 void * deleteElementAt(linkedList * list, int index){
+	element *ele = list->first;
 	for(int i=0;i<list->length;i++){
 		if(index == i){
 			list->length--;
-			return list->first->value;
-			list->first=list->first->next;
+			return ele->value;
+			ele=ele->next;
 		}
-		list->first = list->first->next;
+		ele = ele->next;
 	}
 	return NULL;
 }
+
+int asArray(linkedList list, void **destination, int maxElements) {
+	int count = 0;
+	element *ele = list.first;
+	while(count<maxElements && ele != NULL){
+		*destination = ele->value;
+		ele = ele->next;
+		count++;
+		destination++;
+	}
+	return count;
+};
+
+linkedList  filter(linkedList list, MatchFunc isEven, void * hint){
+	linkedList dest = createList();
+	element *ele = list.first;
+	for(int i=0;i<list.length;i++){
+		if(isEven(hint, ele->value) == 1){
+			add_to_list(&dest, ele->value);
+		}
+		ele = ele->next;
+	}
+	return dest;
+};
+
+int isEven(void * hint, void * item){
+	int * num = (int*)item;
+	return (*num%2==0); 
+}
+
 
 
 

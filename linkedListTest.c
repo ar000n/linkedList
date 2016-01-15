@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "linkedList.h"
 
 void test_for_createList(){
@@ -82,28 +83,37 @@ void test_for_deleteElementAt(){
 	assert(list.length == 4);
 }
 
+void test_for_asArray() {
+	linkedList list = createList();
+	int array[] = {4,5,6,7,8,9};
+	for (int i = 0; i < 6; ++i){
+		add_to_list(&list, &array[i]);
+	}
+	void *destination = (int *)calloc(6,8);
+	int counter = asArray(list, destination, 6);
+	assert(counter == 6);
+	for (int i = 0; i<6; ++i){
+		assert(**(int **)destination == array[i]);
+		destination+=8;
+	}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void test_for_filter(){
+	int hint = 8;
+	linkedList list = createList();
+	int array[] = {4,5,6,7,8,9};
+	int even [] = {4,6,8};
+	for (int i = 0; i < 6; ++i){
+		add_to_list(&list, &array[i]);
+	}
+	linkedList result = filter(list,isEven,&hint);
+	element *ele = result.first;
+	for(int i=0;i<result.length;i++){
+		int * res = (ele->value);
+		assert(*res == even[i]);
+		ele = ele->next;
+	}
+}
 
 
 
