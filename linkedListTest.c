@@ -113,7 +113,59 @@ void test_for_filter(){
 		assert(*res == even[i]);
 		ele = ele->next;
 	}
+};
+ void test_for_reverse(){
+ 	linkedList list = createList();
+	int array[] = {4,5,6,7,8,9};
+	int reverseArray[] = {9,8,7,6,5,4};
+	for (int i = 0; i < 6; ++i){
+		add_to_list(&list, &array[i]);
+	}
+	linkedList result =  reverse(list);
+	element *ele = result.first;
+	for(int i=0;i<result.length;i++){
+		int * res = (ele->value);
+		assert(*res == reverseArray[i]);
+		ele = ele->next;	
+	}
+ };
+
+ void test_for_map(){
+ 	linkedList list = createList();
+	int array[] = {4,5,6,7,8,9};
+	int incArray[] = {6,7,8,9,10,11};
+	for (int i = 0; i < 6; ++i){
+		add_to_list(&list, &array[i]);
+	}
+	linkedList result = map(list,incrementer2,NULL);
+	element *ele = result.first;
+	for(int i=0;i<result.length;i++){
+		int * res = ele->value;
+		assert(*res == incArray[i]);
+		ele = ele->next;		
+	}
+ };
+
+
+void test_for_reduce(){
+	linkedList list = createList();
+	int array[] = {4,5,6,7,8,9};
+	for (int i = 0; i < 6; ++i){
+		add_to_list(&list, &array[i]);
+	}
+	int *result = reduce(list, sumUp, NULL, NULL);
+	assert(*result == 39);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -3,7 +3,7 @@ typedef struct ele{
 	struct ele *next;
 } element;
 
-typedef struct {
+typedef struct linkedList{
 	element *first;
 	element *last;
 	int length;
@@ -22,4 +22,13 @@ int asArray(linkedList, void **, int maxElements);
 typedef int (MatchFunc)(void*, void*);
 linkedList filter(linkedList,MatchFunc,void*);
 int isEven(void*, void*);
+linkedList reverse(linkedList);
+typedef void (ConvertFunc)(void *, void *, void *);
+void incrementer2(void *, void *, void*);
+linkedList map(linkedList, ConvertFunc, void *);
+typedef void* Reducer(void*, void*, void*);
+void * sumUp(void*, void*, void*);
+void * reduce(linkedList, Reducer, void *hint, void *initialValue);
+
+
 

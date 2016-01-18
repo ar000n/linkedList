@@ -1,4 +1,5 @@
 #include "linkedList.h"
+#include <stdio.h>
 #include <stdlib.h>
 linkedList createList(void){
 	linkedList list;
@@ -103,35 +104,59 @@ linkedList  filter(linkedList list, MatchFunc isEven, void * hint){
 int isEven(void * hint, void * item){
 	int * num = (int*)item;
 	return (*num%2==0); 
+};
+
+linkedList reverse(linkedList list){
+	linkedList result = createList();
+	element * ele = list.first;
+	for(int i=list.length-1;i>0;i--){
+		add_to_list(&result,(getElementAt(list,i)));
+	}
+	return result;
+};
+
+ void incrementer2(void* hint, void* sourceItem, void* destinationItem){
+	int *dest = (int *)malloc(sizeof(int));
+	*dest = (*(int *)sourceItem)+2;
+	*(void **)destinationItem = dest;
+};
+
+
+linkedList map(linkedList list, ConvertFunc incrementer2, void * hint){
+	element *ele = list.first;
+	linkedList destination = createList();
+	void * destinationItem ;
+	for(int i=0;i<list.length;i++){
+		incrementer2(hint,ele->value, &destinationItem);
+		add_to_list(&destination, destinationItem);
+		ele = ele->next;
+	}
+	return destination;
+};
+
+void* sumUp(void* hint, void* previousItem, void* item){
+	int *dest = malloc(sizeof(int));
+	*dest = (*(int *)previousItem) + (*(int *)item);
+	return dest;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void * reduce(linkedList list, Reducer sum, void *hint, void *initialValue){
+	element * ele = list.first;
+	void *previousItem;
+	if(initialValue == NULL){
+		 previousItem = ele->value;
+		 ele = ele->next;
+	}
+	else{
+		previousItem = initialValue;
+	}
+	
+	while(ele!=NULL){
+		previousItem = sumUp(hint, previousItem, ele->value);
+		ele = ele->next;
+	}
+	return previousItem;
+};
 
 
 
